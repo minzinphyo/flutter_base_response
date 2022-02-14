@@ -24,10 +24,9 @@ class ProductProvider with ChangeNotifier {
       productList = await repository.getProductList();
       print("Product list is ${productList.length}");
       _apiResponse = ApiResponse.completed(productList);
-    } on SocketException catch (_) {
-      _apiResponse = ApiResponse.error("No Internet");
-    } catch (_) {
-      _apiResponse = ApiResponse.error("Failed");
+    }catch (e) {
+      print("Error ** ${e.toString()}");
+      _apiResponse = ApiResponse.error(e.toString());
     }
     catch (e) {
       if(e is SocketException ){
