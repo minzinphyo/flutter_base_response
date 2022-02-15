@@ -1,15 +1,18 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_base_response/data_models/daos/product_ob.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../data_models/base_response/api_response.dart';
 import '../data_source/repository_impl.dart';
+import '../exception/exception.dart';
 import '../utils/setup_locator.dart';
 
-class ProductProvider with ChangeNotifier {
+class ProductViewModel with ChangeNotifier {
   var repository = locator<RepositoryImpl>();
 
   ApiResponse _apiResponse = ApiResponse.initial('Empty data');
@@ -22,17 +25,11 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
     try {
       productList = await repository.getProductList();
-      print("Product list is ${productList.length}");
       _apiResponse = ApiResponse.completed(productList);
-    }catch (e) {
-      print("Error ** ${e.toString()}");
-      _apiResponse = ApiResponse.error(e.toString());
-    }
-    catch (e) {
-      if(e is SocketException ){
-        _apiResponse = ApiResponse.error("No Internet");
-      }
-      //print("Error **** ${e.toString()}");
+    }on DioError catch (dioError) {
+      final error = DioExceptions.fromDioError(dioError).toString();
+      _apiResponse = ApiResponse.error(error);
+      Fluttertoast.showToast(msg: _apiResponse.message);
     }
     notifyListeners();
   }

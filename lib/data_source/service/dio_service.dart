@@ -13,14 +13,10 @@ class DioService{
     try{
       final response = await _dio.get("https://gist.githubusercontent.com/$url");
       responseJson =  returnResponse(response);
-    } on DioError catch (e) {
-      if (e.error is SocketException) {
-        throw ApiResponse.error("No Internet Connection");
-      }
-      throw e.error;
+    } catch (e) {
+      rethrow;
     }
     return responseJson;
-
   }
 
   dynamic returnResponse(Response response) {
@@ -29,7 +25,8 @@ class DioService{
         dynamic responseJson = jsonDecode(response.toString());
         return responseJson;
       case 400:
-        throw BadRequestException(response.toString());
+        print("400 Error is occurred and ${response.data}");
+        throw BadRequestException(response.data);
       case 401:
       case 403:
         throw UnauthorisedException(response.toString());

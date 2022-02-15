@@ -14,7 +14,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-  var productProvider = locator<ProductProvider>();
+  var productProvider = locator<ProductViewModel>();
 
   @override
   void initState() {
@@ -24,9 +24,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ApiResponse apiResponse = Provider.of<ProductProvider>(context).response;
+    ApiResponse apiResponse = Provider.of<ProductViewModel>(context).response;
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Demo App"),),
+      appBar: AppBar(title: const Text("Flutter Demo App"),),
       body: getProductWidget(context, apiResponse)
     );
   }
@@ -36,7 +36,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
       case Status.LOADING:
         return const Center(child: CircularProgressIndicator());
       case Status.COMPLETED:
-        return Consumer<ProductProvider>(
+        return Consumer<ProductViewModel>(
           builder: (context, shopProfileProvider, child) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView.separated(

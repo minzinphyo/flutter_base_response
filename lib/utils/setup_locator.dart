@@ -6,5 +6,5 @@ GetIt locator = GetIt.instance;
 
 Future setupLocator() async {
   locator.registerLazySingleton<RepositoryImpl>(() => RepositoryImpl());
-  locator.registerLazySingleton<ProductProvider>(() => ProductProvider());
+  locator.registerLazySingleton<ProductViewModel>(() => ProductViewModel());
 }

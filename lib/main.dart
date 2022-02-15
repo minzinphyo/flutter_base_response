@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
-  var productProvider = locator<ProductProvider>();
+  var productProvider = locator<ProductViewModel>();
 
   return runApp(
     MultiProvider(providers: [
