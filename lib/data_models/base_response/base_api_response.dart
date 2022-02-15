@@ -6,7 +6,7 @@ class BaseApiResponse<T> {
   bool _statusCode;
   String _message;
 
-  dynamic get result => _objectResult;
+  dynamic get objectResult => _objectResult;
 
   dynamic get listResult => _listResult;
 
@@ -28,8 +28,8 @@ class BaseApiResponse<T> {
   factory BaseApiResponse.fromObjectJson(Map<String, dynamic> json,
       {@required Function(Map<String, dynamic>) createObject}) {
     return BaseApiResponse<T>(
-      objectResult: createObject(json["result"]),
-      status: json["statusCode"],
+      objectResult: createObject(json["data"]),
+      status: json["status"],
       message: json["message"],
     );
   }

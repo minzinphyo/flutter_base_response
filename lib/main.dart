@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_response/screens/login_screen.dart';
 import 'package:flutter_base_response/screens/product_list_screen.dart';
 import 'package:flutter_base_response/utils/setup_locator.dart';
 import 'package:flutter_base_response/view_model/product_provider.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: ProductListScreen()
+      home: LoginScreen()
     );
   }
 }
