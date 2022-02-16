@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(elevation: 0),
       body: ListView(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.13),

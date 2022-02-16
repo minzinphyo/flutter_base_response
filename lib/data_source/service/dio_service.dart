@@ -1,25 +1,24 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter_base_response/cache/hive_helper.dart';
 import 'package:flutter_base_response/data_models/daos/user_ob.dart';
 import 'package:flutter_base_response/data_source/network/logging_iterceptor.dart';
 import '../../exception/api_exception.dart';
 
 class DioService {
 
-  static String profile = "hello";
+  // BaseOptions options =  BaseOptions(
+  //   headers: {
+  //     "Content-Type": Headers.jsonContentType,
+  //   },
+  //   // contentType: 'application/vnd.api+json',
+  //   //baseUrl: "https://gist.githubusercontent.com/",
+  //   //baseUrl: "https://api-hlapa.yeyintaung.com/",
+  //   connectTimeout: 10000,
+  //   receiveTimeout: 5000,
+  // );
 
-  static BaseOptions options =  BaseOptions(
-    headers: {
-      "Content-Type": Headers.jsonContentType,
-      "Authorization": "Bearer " + profile
-    },
-    // contentType: 'application/vnd.api+json',
-    //baseUrl: "https://gist.githubusercontent.com/",
-    //baseUrl: "https://api-hlapa.yeyintaung.com/",
-    connectTimeout: 10000,
-    receiveTimeout: 5000,
-  );
-  final Dio _dio = Dio(options)..interceptors.add(LoggingInterceptor());
+  final Dio _dio = Dio();
 
   Future<Map<String, dynamic>> getRequest(
     String url, {
@@ -33,10 +32,29 @@ class DioService {
       final response = await _dio.get(
         "https://api-hlapa.yeyintaung.com/" + url,
         queryParameters: queryParameters,
-        options: options,
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
+      String token = HiveHelper.getToken();
+      BaseOptions options = token != null ?  BaseOptions(
+        headers: {
+          "Content-Type": Headers.jsonContentType,
+          "Authorization": "Bearer " + token
+        },
+        // contentType: 'application/vnd.api+json',
+        //baseUrl: "https://gist.githubusercontent.com/",
+        //baseUrl: "https://api-hlapa.yeyintaung.com/",
+        connectTimeout: 10000,
+        receiveTimeout: 5000,
+      ) : BaseOptions(
+        headers: {
+          "Content-Type": Headers.jsonContentType,
+        },
+        connectTimeout: 10000,
+        receiveTimeout: 5000,
+      );
+      Dio(options).interceptors.add(LoggingInterceptor());
+      print("TOKEN Bearer $token");
       responseJson = returnResponse(response);
     } catch (e) {
       rethrow;
@@ -64,6 +82,7 @@ class DioService {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
+      //Dio(options).interceptors.add(LoggingInterceptor());
       responseJson = returnResponse(response);
     } catch (e) {
       rethrow;
