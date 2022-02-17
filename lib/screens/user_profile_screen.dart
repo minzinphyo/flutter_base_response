@@ -5,10 +5,9 @@ import 'package:provider/provider.dart';
 import '../data_models/base_response/api_response.dart';
 import '../utils/setup_locator.dart';
 import '../view_model/user_view_model.dart';
-import '../widget/list_item_salon_widget.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({Key key}) : super(key: key);
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
@@ -19,7 +18,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   void initState() {
-    userProvider.getSalonList();
+    userProvider.getProfile(context);
     super.initState();
   }
 
@@ -30,47 +29,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          "Top Salon",
+          "Profile",
           style:
-              GoogleFonts.lato(fontWeight: FontWeight.bold, color: Colors.blue),
+              GoogleFonts.lato(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 12.0, right: 12.0, left: 12.0),
-        child: Column(
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 2.0),
-                child: TextField(
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: (input) {},
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
-                      icon: const Icon(
-                        Icons.search,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {},
-                    ),
-                    hintText: "Search salon by name",
-                    hintStyle: const TextStyle(fontSize: 15),
-                  ),
-                  onChanged: (input) {
-                    //print(input);
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              child: widgetBody(context, apiResponse),
-            ),
-          ],
-        ),
+        child: widgetBody(context, apiResponse),
       ),
     );
   }
@@ -83,24 +49,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         return Consumer<UserViewModel>(
           builder: (context, userProvider, child) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView.separated(
-                  itemCount: userProvider.salonList.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(
-                      thickness: 1,
-                      color: Colors.black,
-                    );
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return listItemSalonWidget(
-                      showFavourite: true,
-                      context: context,
-                    );
-                  })),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("User Name : ${userProvider.profileOb!.name}"),
+                  ElevatedButton(
+                    onPressed: () => print("User Logout"),
+                    child: const Text("Logout"),
+                  )
+                ],
+              )),
         );
       case Status.ERROR:
         return Center(
-          child: Text(apiResponse.message),
+          child: Text(apiResponse.message!),
         );
       case Status.INITIAL:
       default:

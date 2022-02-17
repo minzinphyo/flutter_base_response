@@ -29,7 +29,7 @@ class ProductViewModel with ChangeNotifier {
     }on DioError catch (dioError) {
       final error = DioExceptions.fromDioError(dioError).toString();
       _apiResponse = ApiResponse.error(error);
-      Fluttertoast.showToast(msg: _apiResponse.message);
+      Fluttertoast.showToast(msg: _apiResponse.message!);
     }
     notifyListeners();
   }

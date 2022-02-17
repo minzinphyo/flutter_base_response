@@ -11,14 +11,14 @@
 
 class UserOb {
   UserOb({
-      String token, 
-      String memberId, 
-      String qr, 
-      String name, 
-      String phone, 
-      int age, 
-      String gender, 
-      String address, 
+      String? token,
+      String? memberId,
+      String? qr,
+      String? name,
+      String? phone,
+      int? age,
+      String? gender,
+      String? address,
       dynamic image,}){
     _token = token;
     _memberId = memberId;
@@ -42,24 +42,24 @@ class UserOb {
     _address = json['address'];
     _image = json['image'];
   }
-  String _token;
-  String _memberId;
-  String _qr;
-  String _name;
-  String _phone;
-  int _age;
-  String _gender;
-  String _address;
+  String? _token;
+  String? _memberId;
+  String? _qr;
+  String? _name;
+  String? _phone;
+  int? _age;
+  String? _gender;
+  String? _address;
   dynamic _image;
 
-  String get token => _token;
-  String get memberId => _memberId;
-  String get qr => _qr;
-  String get name => _name;
-  String get phone => _phone;
-  int get age => _age;
-  String get gender => _gender;
-  String get address => _address;
+  String get token => _token!;
+  String get memberId => _memberId!;
+  String get qr => _qr!;
+  String get name => _name!;
+  String get phone => _phone!;
+  int get age => _age!;
+  String get gender => _gender!;
+  String get address => _address!;
   dynamic get image => _image;
 
   Map<String, dynamic> toJson() {

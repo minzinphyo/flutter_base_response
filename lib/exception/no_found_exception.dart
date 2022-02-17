@@ -1,5 +1,5 @@
 class NotFoundException {
-  final String message;
+  final String? message;
 
   NotFoundException({this.message});
 }

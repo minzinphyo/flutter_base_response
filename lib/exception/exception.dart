@@ -5,7 +5,7 @@ import 'package:flutter_base_response/exception/no_found_exception.dart';
 class DioExceptions implements Exception {
   DioExceptions.fromDioError(DioError dioError) {
     if (dioError.type == DioErrorType.response) {
-      message = _handleError(dioError.response.statusCode, dioError.response.data);
+      message = _handleError(dioError.response!.statusCode, dioError.response!.data);
     }else if (dioError.type == DioErrorType.connectTimeout) {
       message = "Receive timeout in connection with API server";
     }else if (dioError.type == DioErrorType.receiveTimeout) {
@@ -41,14 +41,16 @@ class DioExceptions implements Exception {
     // }
   }
 
-  String message;
+  String? message;
 
-  String _handleError(int statusCode, dynamic error) {
+  String _handleError(int? statusCode, dynamic error) {
     print("Status code $statusCode");
     //final String errorMessage = NotFoundException(message: error["message"]).message;
     switch (statusCode) {
       case 400:
         return 'Bad request';
+      case 401:
+        return 'Unauthenticated';
       case 404:
         return "No Found";
       case 500:
@@ -59,5 +61,5 @@ class DioExceptions implements Exception {
   }
 
   @override
-  String toString() => message;
+  String toString() => message!;
 }

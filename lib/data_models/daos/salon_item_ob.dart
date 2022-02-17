@@ -26,13 +26,13 @@ class SalonItemOb {
     image = json['image'];
   }
 
-  int id;
-  String name;
-  String phone;
-  String latitude;
-  String longitude;
-  String address;
-  String image;
+  int? id;
+  String? name;
+  String? phone;
+  String? latitude;
+  String? longitude;
+  String? address;
+  String? image;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

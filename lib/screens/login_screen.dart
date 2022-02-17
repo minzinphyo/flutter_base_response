@@ -6,7 +6,7 @@ import '../utils/setup_locator.dart';
 import '../view_model/user_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();

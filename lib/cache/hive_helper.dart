@@ -4,7 +4,7 @@ class HiveHelper {
   static const String tokenName = "tokenName";
   static const String tokenKey = "tokenKey";
 
-  static Box<String> tokenBox;
+  static Box<String>? tokenBox;
 
   // static Box<SalonOb> salonBox = Hive.box<SalonOb>(HiveHelper.salonName);
 
@@ -18,13 +18,13 @@ class HiveHelper {
   }
 
 
-  static String getToken() {
+  static String? getToken() {
     tokenBox = Hive.box<String>(tokenName);
-    return tokenBox.get(tokenKey);
+    return tokenBox!.get(tokenKey);
   }
 
   static void clearAllBoxes() {
     print("All DB are clear");
-    tokenBox.clear();
+    tokenBox!.clear();
   }
 }

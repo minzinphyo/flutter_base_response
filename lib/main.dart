@@ -29,12 +29,12 @@ void main() async {
       ChangeNotifierProvider(
         create: (context) => userProvider,
       ),
-    ], child: const MyApp()),
+    ], child: MyApp()),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

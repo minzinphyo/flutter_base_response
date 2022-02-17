@@ -1,7 +1,7 @@
 class ApiResponse<T> {
-  Status status;
-  T data;
-  String message;
+  Status? status;
+  T? data;
+  String? message;
 
   ApiResponse.initial(this.message) : status = Status.INITIAL;
 
@@ -13,7 +13,7 @@ class ApiResponse<T> {
 
   @override
   String toString() {
-    return message;
+    return message!;
   }
 }
 

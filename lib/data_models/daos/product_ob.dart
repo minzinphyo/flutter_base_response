@@ -4,12 +4,12 @@
 
 class Product {
   Product({
-      int id,
-      String name,
-      int price,}){
-    _id = id;
-    _name = name;
-    _price = price;
+      int? id,
+      String? name,
+      int? price,}){
+    _id = id!;
+    _name = name!;
+    _price = price!;
 }
 
   Product.fromJson(dynamic json) {
@@ -17,12 +17,12 @@ class Product {
     _name = json['name'];
     _price = json['price'];
   }
-  int _id;
-  String _name;
-  int _price;
+  int? _id;
+  String? _name;
+  int? _price;
 
-  int get id => _id;
-  String get name => _name;
-  int get price => _price;
+  int get id => _id!;
+  String get name => _name!;
+  int get price => _price!;
 
 }

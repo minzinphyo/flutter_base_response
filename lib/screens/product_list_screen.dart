@@ -6,7 +6,7 @@ import '../utils/setup_locator.dart';
 import '../view_model/product_provider.dart';
 
 class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({Key key}) : super(key: key);
+  const ProductListScreen({Key? key}) : super(key: key);
 
 
   @override
@@ -53,7 +53,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         );
       case Status.ERROR:
         return Center(
-          child: Text(apiResponse.message),
+          child: Text(apiResponse.message!),
         );
       case Status.INITIAL:
       default:

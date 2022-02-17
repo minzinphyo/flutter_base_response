@@ -1,7 +1,7 @@
 class BaseResponseType<T> {
-  T data;
-  MsgState message;
-  ErrorType errorType;
+  T? data;
+  MsgState? message;
+  ErrorType? errorType;
 
   BaseResponseType({
     this.data,
